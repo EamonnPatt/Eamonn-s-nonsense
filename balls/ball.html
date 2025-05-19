@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>balls</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    h1 {
+      color: red;
+      font-size: 3rem;
+      letter-spacing: -1px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      text-shadow: 0 0 4px blue;
+    }
+
+    p {
+      color: red;
+      font-size: 2rem;
+      letter-spacing: -1px;
+      position: absolute;
+      top: 3.5rem;
+      right: 0;
+      margin: 0;
+      text-shadow: 0 0 4px blue;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #resetBallsButton, #menu {
+      position: absolute;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    #resetBallsButton:hover, #menu:hover {
+      background-color: #444;
+    }
+
+    #resetBallsButton {
+      bottom: 60px;
+      margin-bottom: 5px;
+    }
+
+    #menu {
+      bottom: 20px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>BALLS</h1>
+  <p id="ballCount">Ball count: 0</p>
+  <canvas id="balls"></canvas>
+
+  <button id="resetBallsButton">Reset Balls</button>
+  <a id="menu" href="../index.html">Menu</a>
+
+  <script src="balls.js"></script>
+</body>
+</html>

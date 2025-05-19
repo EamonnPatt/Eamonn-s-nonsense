@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eamonns Nonesense</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .main-menu {
+      position: relative;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+      color: white;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .main-menu h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .main-menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .main-menu li {
+      margin: 10px 0;
+    }
+
+    .main-menu a {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #222;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .main-menu a:hover {
+      background: #444;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="starfield"></canvas>
+
+  <div class="main-menu">
+    <h2>Eamonn's Menu</h2>
+    <ul>
+      <li><a href="/paint/paint.html">🎨 Paint</a></li>
+      <li><a href="/balls/ball.html">⚽ Bouncing Balls</a></li>
+    </ul>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("starfield");
+    const ctx = canvas.getContext("2d");
+
+    let stars = [];
+    const numStars = 250;
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function createStar() {
+      return {
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        z: Math.random() * width,
+        o: Math.random()
+      };
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(createStar());
+    }
+
+    function drawStar(star) {
+      const sx = (star.x / star.z) * width + width / 2;
+      const sy = (star.y / star.z) * height + height / 2;
+      const radius = (1 - star.z / width) * 2;
+      ctx.beginPath();
+      ctx.arc(sx, sy, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.o})`;
+      ctx.fill();
+    }
+
+    function updateStar(star) {
+      star.z -= 2;
+      if (star.z <= 0) {
+        Object.assign(star, createStar(), { z: width });
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, width, height);
+      for (let star of stars) {
+        drawStar(star);
+        updateStar(star);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
